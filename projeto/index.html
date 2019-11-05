@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="helloWorld">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="angular.js"></script>
+
+  <script>
+    //Isso cria um módulo
+    //O colchetes significa a importacao de novos modulos.
+    angular.module("helloWorld",[]);
+
+    //Isso encontra um módulo
+    angular.module("helloWorld").controller("helloWorldCtrl", function($scope){
+      $scope.message = "Ola Mundo!";
+
+    });
+  </script>
+
+  <title>Estudo Angular JS v1.7</title>
+</head>
+<body>
+    <div ng-controller="helloWorldCtrl">
+      {{message}}
+    </div>
+</body>
+</html>
