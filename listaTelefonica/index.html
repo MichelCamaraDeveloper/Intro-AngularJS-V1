@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <script src="angular.js"></script>
+  <script src="lib/angular.js"></script>
+  <link rel="stylesheet" href="css/style.css">
   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -21,13 +22,49 @@
     //Isso encontra um módulo
     angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope){
        $scope.menssagem = "Lista Telefonica";
+
+       $scope.contatos = [
+         {nome: "Pedro", telefone:"99999988"},
+         {nome: "Ana", telefone:"99999977"},
+         {nome: "Maria", telefone:"99999966"},
+       ];
+
+      $scope.adicionarContato = function(contato){
+        $scope.contatos.push(angular.copy(contato));
+        delete $scope.contato;
+
+      };
+
     });
   </script>
   <title>Estudo Angular JS v1.7</title>
 </head>
 <body ng-controller="listaTelefonicaCtrl">
     <div class="jumbotron">
-      <h4 ng-bind="menssagem"></h4> 
+      <!-- ng-bind - Substitui o elemento por uma expressao -->
+      <!-- <h4 ng-bind="menssagem"></h4>  -->
+      <!-- Elemento menssagem -->
+      <h3>{{menssagem}}</h3> 
+
+      <!-- ng-repeat - Itera sobre os itens de uma colecao 
+      ou de um objeto -->
+      <table class="table table-striped">
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </tr>
+        <tr ng-repeat="contato in contatos">
+          <td>{{contato.nome}}</td>
+          <td>{{contato.telefone}}</td>
+        </tr>
+      </table>
+      <hr/>
+      <!-- ng-model - Vincula uma propriedade ao $scope -->
+      <input class="form-control" type="text" placeholder="Nome" ng-model="contato.nome"/>
+      <input class="form-control" type="text" placeholder="Telefone" ng-model="contato.telefone"/>
+
+      <!-- ng-click - Atribui um comportamento ao evento -->
+      <button class="btn btn-primary btn-block " ng-click="adicionarContato(contato)"> Adicionar Contato </button>
     </div>
 </body>
 </html>
